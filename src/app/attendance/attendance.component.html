@@ -1,0 +1,81 @@
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <H4>ADD ATTENDANCE</H4>
+      <br>
+       <form #addAttendanceForm="ngForm" (ngSubmit)="addAttendanceForm.valid && onSubmit(addAttendanceForm)">
+         <br>
+           <div class="form-group row">
+             <label for="inputTeacherId" class="col-sm-2 col-form-label">Teacher id</label>
+             <div class="col-sm-10">
+               <input type="number" name="teacherId"  #teacherId="ngModel" [(ngModel)]="model.teacherId" class="form-control" id="inputTeacherId" placeholder="teacherId"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+            <label for="inputClass" class="col-sm-2 col-form-label">Class</label>
+            <div class="col-sm-10">
+              <input type="text" name="class" #class="ngModel" [(ngModel)]="model.class" class="form-control" id="inputClass" placeholder="class"  required>
+            </div>
+          </div><br>
+           <div class="form-group row">
+             <label for="inputPresent" class="col-sm-2 col-form-label">Present</label>
+             <div class="col-sm-10">
+               <input type="number" name="present" #present="ngModel" [(ngModel)]="model.present" class="form-control" id="inputPresent" placeholder="present"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+            <label for="inputAbsent" class="col-sm-2 col-form-label">Absent</label>
+            <div class="col-sm-10">
+              <input type="number" name="absent" #absent="ngModel" [(ngModel)]="model.absent" class="form-control" id="inputAbsent" placeholder="absent"  required>
+            </div>
+          </div><br>
+           <div class="form-group row">
+             <div class="col-sm-10 offset-2">
+       
+               <!--<button type="submit" class="btn btn-primary" (click)="onSubmit(form)" >Submit</button>-->
+               <input type="submit" class="btn btn-primary" value="Submit">
+             </div>
+           </div>
+       </form>
+   </div>
+</div>
+
+
+<div class="container ">
+   <div class="row ">
+       <div class="col-sm-12 mt-5 mb-5 ">
+           <div class="col-sm-12 mx-auto">
+               <table class="table table-striped lg-12 sm-12" *ngIf="sharedService.allAttendence">
+                   <thead>
+                     <tr>
+                       <th scope="col">#</th>
+                       <th scope="col">TeacherId</th>
+                       <th scope="col">Present </th>
+                       <th scope="col">Absent </th>
+                       <th scope="col">Date</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let atd of sharedService.allAttendence;index as i">
+                           <th >{{i+1}}</th>
+                           <td>{{atd.teacherId}}</td>
+                           <td>{{atd.present}}</td>
+                           <td>{{atd.absent}}</td>
+                           <td>{{sharedService.getDate(atd.createdAt)}}</td>
+                           <td>
+                               <button class="btn btn-danger btn-sm" (click)="passDelete(atd._id)" >Delete</button>
+                               
+                          </td>
+                           <td>
+                               <button class="btn btn-secondary btn-sm" (click)="passModel(atd._id,atd.teacherId,atd.present,atd.absent)"routerLink="/updateattendance" >Update</button>
+                           </td>
+                           
+                       </tr> 
+                   </tbody>
+                 </table>
+               
+           </div>
+       </div>
+   </div>
+   </div>
+

@@ -1,0 +1,74 @@
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <H4>ADD SUBJECT</H4>
+      <br>
+       <form #addSubjectForm="ngForm" (ngSubmit)="addSubjectForm.valid && onSubmit(addSubjectForm)">
+           <div class="form-group row">
+             <label for="inputSubjectid" class="col-sm-2 col-form-label">Subject id</label>
+             <div class="col-sm-10">
+               <input type="number" name="subjectId"  #subjectId="ngModel" [(ngModel)]="model.subjectId" class="form-control" id="inputSubjectId" placeholder="subjectId"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+            <label for="inputTeacherid" class="col-sm-2 col-form-label">Teacher id</label>
+            <div class="col-sm-10">
+              <input type="number" name="teacherId"  #teacherId="ngModel" [(ngModel)]="model.teacherId" class="form-control" id="inputTeacherId" placeholder="teacherId"  required>
+            </div>
+          </div><br>
+           <div class="form-group row">
+             <label for="inputName" class="col-sm-2 col-form-label">Subject Name</label>
+             <div class="col-sm-10">
+               <input type="text" name="name" #name="ngModel" [(ngModel)]="model.name" class="form-control" id="inputName" placeholder="name"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+             <div class="col-sm-10 offset-2">
+       
+               <!--<button type="submit" class="btn btn-primary" (click)="onSubmit(form)" >Submit</button>-->
+               <input type="submit" class="btn btn-primary" value="Submit">
+             </div>
+           </div>
+       </form>
+   </div>
+</div>
+
+
+<div class="container ">
+   <div class="row ">
+       <div class="col-sm-12 mt-5 mb-5 ">
+           <div class="col-sm-12 mx-auto">
+               <table class="table table-striped lg-12 sm-12" *ngIf="sharedService.allSubjects">
+                   <thead>
+                     <tr>
+                       <th scope="col">#</th>
+                       <th scope="col">SubjectId</th>
+                       <th scope="col">Name</th>
+                       <th scope="col">TeacherId</th>
+                       <th scope="col">CreatedAt</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let sub of sharedService.allSubjects;index as i">
+                           <th >{{i+1}}</th>
+                           <td>{{sub.subjectId}}</td>
+                           <td>{{sub.name}}</td>
+                           <td>{{sub.teacherId}}</td>
+                           <td>{{sharedService.getDate(sub.createdAt)}}</td>
+                           <td>
+                               <button class="btn btn-danger btn-sm" (click)="passDelete(sub._id)" >Delete</button>
+                               
+                          </td>
+                           <td>
+                               <button class="btn btn-secondary btn-sm" (click)="passModel(sub._id,sub.teacherId)"routerLink="/updatesubject" >Update</button>
+                           </td>
+                           
+                       </tr> 
+                   </tbody>
+                 </table>
+               
+           </div>
+       </div>
+   </div>
+   </div>
+
