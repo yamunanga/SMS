@@ -1,0 +1,92 @@
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <H4>ADD RESULT</H4>
+      <br>
+       <form #addResultForm="ngForm" (ngSubmit)="addResultForm.valid && onSubmit(addResultForm)">
+        <div class="form-group row">
+            <label for="inputSubjectid" class="col-sm-2 col-form-label">Subject id</label>
+            <div class="col-sm-10">
+              <input type="number" name="subjectId"  #subjectId="ngModel" [(ngModel)]="model.subjectId" class="form-control" id="inputsubjectId" placeholder="subjectId"  required>
+            </div>
+          </div><br>
+        <div class="form-group row">
+            <label for="inputStudentId" class="col-sm-2 col-form-label">Student id</label>
+            <div class="col-sm-10">
+              <input type="number" name="studentId"  #studentId="ngModel" [(ngModel)]="model.studentId" class="form-control" id="inputStudentId" placeholder="studentId"  required>
+            </div>
+          </div><br>
+           <div class="form-group row">
+             <label for="inputTeacherId" class="col-sm-2 col-form-label">Teacher id</label>
+             <div class="col-sm-10">
+               <input type="number" name="teacherId"  #teacherId="ngModel" [(ngModel)]="model.teacherId" class="form-control" id="inputTeacherId" placeholder="teacherId"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+             <label for="inputSemester" class="col-sm-2 col-form-label">Semester</label>
+             <div class="col-sm-10">
+               <input type="text" name="semester" #semester="ngModel" [(ngModel)]="model.semester" class="form-control" id="inputsemester" placeholder="semester"  required>
+             </div>
+           </div><br>
+           <div class="form-group row">
+            <label for="inputResult" class="col-sm-2 col-form-label">Result</label>
+            <div class="col-sm-10">
+              <input type="text" name="result" #result="ngModel" [(ngModel)]="model.result" class="form-control" id="inputResult" placeholder="result"  required>
+            </div>
+          </div><br>
+           <div class="form-group row">
+             <div class="col-sm-10 offset-2">
+       
+               <!--<button type="submit" class="btn btn-primary" (click)="onSubmit(form)" >Submit</button>-->
+               <input type="submit" class="btn btn-primary" value="Submit">
+             </div>
+           </div>
+       </form>
+   </div>
+</div>
+
+
+<div class="container ">
+   <div class="row ">
+       <div class="col-sm-12 mt-5 mb-5 ">
+           <div class="col-sm-12 mx-auto">
+               <table class="table table-striped lg-12 sm-12" *ngIf="sharedService.allResult">
+                   <thead>
+                     <tr>
+                       <th scope="col">#</th>
+                       <th scope="col">StudentId</th>
+                       <th scope="col">SubjectId</th>
+                       <th scope="col">TeacherId</th>
+                       <th scope="col">Semester</th>
+                       <th scope="col">Class</th>
+                       <th scope="col">Result</th>
+                       <th scope="col">CreatedAt</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let res of sharedService.allResult;index as i">
+                           <th >{{i+1}}</th>
+                           <td>{{res.studentId}}</td>
+                           <td>{{res.subjectId}}</td>
+                           <td>{{res.teacherId}}</td>
+                           <td>{{res.semester}}</td>
+                           <td>{{res.class}}</td>
+                           <td>{{res.result}}</td>
+                           <td>{{sharedService.getDate(res.createdAt)}}</td>
+                           <td>
+                               <button class="btn btn-danger btn-sm" (click)="passDelete(res._id)" >Delete</button>
+                               
+                          </td>
+                           <td>
+                               <button class="btn btn-secondary btn-sm" (click)="passModel(res._id,res.teacherId,res.semester,res.result)"routerLink="/updateresult" >Update</button>
+                           </td>
+                           
+                       </tr> 
+                   </tbody>
+                 </table>
+               
+           </div>
+       </div>
+   </div>
+   </div>
+
